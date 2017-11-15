@@ -10,6 +10,10 @@ require 'json'
 require 'heizu_board'
 require 'player'
 require 'config'
+require 'logger'
+
+slog = Logger.new(SERVER_LOG + "/server.log")
+glog = Logger.new(GAME_LOG + "/game.log")
 
 # メンテナンス性のため、メインスレッド以外が倒れた時でもスクリプト全体を停止する
 Thread.abort_on_exception = true
@@ -17,7 +21,10 @@ Thread.abort_on_exception = true
 mutex = Mutex.new
 
 server_for_players = TCPServer.open(PLAYERS_SERVER_PORT)
+slog.info{"Open server on port #{PLAYERS_SERVER_PORT}"}
 server_for_audiences = TCPServer.open(AUDIENCES_SERVER_PORT)
+slog.info{"Open server on port #{AUDIENCES_SERVER_PORT}"}
+
 
 addr = server_for_players.addr
 addr.shift

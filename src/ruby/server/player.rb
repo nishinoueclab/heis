@@ -1,5 +1,5 @@
 class Player
-  def initialize(name, sock)
+  def initialize(name, sock = nil)
     @name = name
     @sock = sock
   end
