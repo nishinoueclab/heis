@@ -1,4 +1,4 @@
-require 'Unit'
+require 'unit'
 require 'json'
 
 class HeizuBoard
@@ -23,6 +23,9 @@ class HeizuBoard
 
   attr_reader :count, :finished
   
+  # action jsonを受け取って実行を行います。
+  #
+  #
   def turn(action)
     @count += 1
     
@@ -32,11 +35,28 @@ class HeizuBoard
       @finished = true
       
     end
-    return {"result" => "ok"}
+    return {:result => "ok"}
+  end
+  
+  # あるユニットを動かす
+  # @arg unit  unit_id as string
+  # @arg to {:x => xxx, :y => yyy} as hash
+  # @return 移動可能なら移動を行いtrue. 移動不可ならfalse.
+  def move_unit(unit, to)
+    
+  end
+  
+  # targetマスへの攻撃を行う
+  # target == {:x => xxx, :y => yyy}
+  def atk(target)
   end
   
   def get_unit(unit_id)
-    
+    @board.flatten(1).filter{|u| u.unit_id = unit_id}[0]
+  end
+  
+  def locate(unit)
+    @board.flatten(1).filter{|u| u == unit}
   end
 
   def next_player
@@ -49,18 +69,18 @@ class HeizuBoard
 
   def to_hash
     hash = {}
-    hash["width"] = @width
-    hash["height"] = @height
-    hash["turn_team"] = next_player.name
-    hash["count"] = @count
-    hash["finished"] = @finished
-    hash["units"] = []
+    hash[:width] = @width
+    hash[:height] = @height
+    hash[:turn_team] = next_player.name
+    hash[:count] = @count
+    hash[:finished] = @finished
+    hash[:units] = []
     (0...@height).each do |i|
       (0...@width).each do |j|
         if @board[i][j] then
           unit_hash = @board[i][j].to_hash()
-          unit_hash["locate"] = {"x" => j, "y" => i}
-          hash["units"] << unit_hash
+          unit_hash[:locate] = {:x => j, :y => i}
+          hash[:units] << unit_hash
         end
       end
     end

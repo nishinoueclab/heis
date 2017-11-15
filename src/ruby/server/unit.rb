@@ -19,13 +19,22 @@ class Unit
   def to_s
     unit_id
   end
+  
+  # 自身の位置を盤面に問い合わせてHashで返却
+  def locate
+    
+  end
+  
+  def move_to?()
+    
+  end
 
   def to_hash
     json = {}
-    json["type"] = @type
-    json["unit_id"] = unit_id
-    json["hp"] = @hp
-    json["team"] = @player.name
+    json[:type] = @type
+    json[:unit_id] = unit_id
+    json[:hp] = @hp
+    json[:team] = @player.name
     return json
   end
 end

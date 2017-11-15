@@ -1,15 +1,23 @@
+# PRJHOMEはsrcの上位ディレクトリ。 
+PRJHOME = File.dirname('.')
+# PRJHOME = File.dirname(__FILE__) + '/../../../'
+
+# ロードパスにserverパッケージを追加
+$: << PRJHOME + '/src/ruby/server'
+
 require 'socket'
 require 'json'
-require 'HeizuBoard'
-require 'Player'
+require 'heizu_board'
+require 'player'
+require 'config'
 
 # メンテナンス性のため、メインスレッド以外が倒れた時でもスクリプト全体を停止する
 Thread.abort_on_exception = true
 
 mutex = Mutex.new
 
-server_for_players = TCPServer.open(20000)
-server_for_audiences = TCPServer.open(20001)
+server_for_players = TCPServer.open(PLAYERS_SERVER_PORT)
+server_for_audiences = TCPServer.open(AUDIENCES_SERVER_PORT)
 
 addr = server_for_players.addr
 addr.shift
