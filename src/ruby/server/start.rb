@@ -79,7 +79,7 @@ threads.each {|t| t.join()}
 puts "init done."
 
 # 盤面の作成
-puts board = HeizuBoard.new(players[0],players[1])
+puts board = HeizuBoard.new(players[0], players[1], MAX_TURN)
 
 # 対戦開始
 loop do

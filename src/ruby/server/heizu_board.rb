@@ -2,12 +2,13 @@ require 'unit'
 require 'json'
 
 class HeizuBoard
-  def initialize(player1, player2)
+  def initialize(player1, player2, max_turn = nil)
     @width, @height = 20, 20
     @next_player = player1
     @player1 = player1
     @player2 = player2
     @count = 0
+    @max_turn = max_turn
     @finished = false
     @board = Array.new(@height).map{Array.new(@width){nil}}
     index = 0
@@ -26,7 +27,7 @@ class HeizuBoard
   # action jsonを受け取って実行を行います。
   #
   #
-  def turn(action, end_count = nil)
+  def turn(action)
     @count += 1
     contents = action[:contents]
     unit_ids = [] # 重複チェック
@@ -48,7 +49,7 @@ class HeizuBoard
 
     @next_player = @next_player == @player1 ? @player2 : @player1
 
-    @finished = (@count > end_count) if end_count
+    @finished = (@count > @max_turn) if @max_turn
     @finished = true if @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? }.group_by{|u| u.player.name}.map{|k, v| v.size}.min == 0
 
     return {:result => results}

@@ -9,6 +9,10 @@ AUDIENCES_SERVER_PORT   = 20001
 TEST_PLAYER             = []
 # TEST_PLAYER           = ['foo', 'goo']
 
+# 最大ターン数
+MAX_TURN                = 50
+# MAX_TURN              = nil
+
 # 対戦ログを保存するディレクトリを指定
 GAME_LOG                = File.dirname('.') + '/log'
 # GAME_LOG                = File.dirname(__FILE__) + '/../../log'
