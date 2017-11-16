@@ -1,0 +1,45 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema",
+	"type": "object",
+	"properties": {
+		"turn_team": {
+			"type": "string",
+			"description": "チーム名"
+		},
+		"contents": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"unit_id": {
+						"type": "string"
+					},
+					"to": {
+						"type": {
+							"x": {
+								"type": "integer"
+							},
+							"y": {
+								"type": "integer"
+							}
+						}
+					},
+					"atk": {
+						"type": {
+							"x": {
+								"type": "integer"
+							},
+							"y": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"required": [
+		"turn_team",
+		"contents"
+	]
+}

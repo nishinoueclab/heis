@@ -1,4 +1,4 @@
-# PRJHOMEはsrcの上位ディレクトリ。 
+# PRJHOMEはsrcの上位ディレクトリ。
 PRJHOME = File.dirname('.')
 # PRJHOME = File.dirname(__FILE__) + '/../../../'
 
@@ -11,6 +11,7 @@ require 'heizu_board'
 require 'player'
 require 'config'
 require 'logger'
+require 'json-schema'
 
 slog = Logger.new(SERVER_LOG + "/server.log")
 glog = Logger.new(GAME_LOG + "/game.log")
@@ -24,7 +25,6 @@ server_for_players = TCPServer.open(PLAYERS_SERVER_PORT)
 slog.info{"Open server on port #{PLAYERS_SERVER_PORT}"}
 server_for_audiences = TCPServer.open(AUDIENCES_SERVER_PORT)
 slog.info{"Open server on port #{AUDIENCES_SERVER_PORT}"}
-
 
 addr = server_for_players.addr
 addr.shift
@@ -91,9 +91,22 @@ loop do
   }
   break if board.finished
 
-  puts action = JSON.parse(board.next_player().sock.gets)
-  puts result = JSON.generate(board.turn(action))
-  board.last_player().sock.puts(result)
+  action_str = board.next_player().sock.gets
+  slog.info "recive " + action_str
+  # JSONの整合性チェック
+  action_schema = File.open(File.dirname(__FILE__) + "/action-schema.json").read
+  action_err = JSON::Validator.fully_validate(action_schema, action_str, :strict => false)
+  if(action_err.size > 0)
+    # 不正なJSONの場合は何もぜず、ターンを終了する。
+    board.turn({:turn_team => board.next_player().name, :contents => []})
+    board.last_player().sock.puts(JSON.generate({:result => [{:error => action_err.to_s}]}))
+  else
+    action = JSON.parse(action_str, {:symbolize_names => true})
+    result = JSON.generate(board.turn(action))
+    slog.info "send " + result
+    board.last_player().sock.puts(result)
+  end
+
 end
 
 # 通信を閉じる

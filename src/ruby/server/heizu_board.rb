@@ -31,28 +31,26 @@ class HeizuBoard
     contents = action[:contents]
     unit_ids = [] # 重複チェック
     results = contents.map { |c|
-      ret = nil
+
       unit_id = c[:unit_id]
-      ret = {:unit_id => unit_id, :error => "Duplicate unit_id : #{unit_id}"} if(unit_ids.include?(unit_id))
+      next {:unit_id => unit_id, :error => "Duplicate unit_id : #{unit_id}"} if(unit_ids.include?(unit_id))
 
       if to = c[:to]
-      ret = {:unit_id => unit_id, :error => "Can't move this unit : #{unit_id}"} if(!move_unit(unit_id, to))
+      next {:unit_id => unit_id, :error => "Can't move this unit : #{unit_id}"} if(!move_unit(unit_id, to))
       end
       
       if atk = c[:atk]
-      ret = {:unit_id => unit_id, :error => "Can't attack other unit: #{get_unit_by_locate(atk)}"} if(!atk(unit_id, atk))
+      next {:unit_id => unit_id, :error => "Can't attack other unit: #{get_unit_by_locate(atk)}"} if(!atk(unit_id, atk))
       end
       
-      ret
+      next nil
     }.select{|r| !r.nil?}
       
     @next_player = @next_player == @player1 ? @player2 : @player1
     if @count > 10
       @finished = true
     end
-    
-    puts "OK"
-    
+
     return {:result => results}
   end
 

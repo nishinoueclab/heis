@@ -37,7 +37,18 @@ team_names.each {|team_name|
       if(board["turn_team"] == team_name)
         puts "my turn"
         # 実際には行動JSONを送る
-        sock.puts '{"a": "b"}'
+        sock.puts JSON.generate({
+          :turn_team => team_name,
+          :contents => [
+          {
+          :unit_id => "fo00",
+          :to => {
+          :x=> 1,
+          :y=> 0
+          }
+          }
+          ]
+        })
         sock.flush
 
         # 結果を取得
