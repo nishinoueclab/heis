@@ -112,21 +112,3 @@ end
 # 通信を閉じる
 notify(audience_socks, "finished")
 player_socks.concat(audience_socks).each {|s| s.close}
-
-#audiences_thread = Thread.new {
-#  # 観戦用スレッド
-#  Thread.start(server_for_audiences.accept) do |sock|   # save to dynamic variable
-#    print(sock, " is accepted\n")
-#
-#    sock.puts JSON.generate({"message" => "You are audience."})
-#    sleep(0.1) while board == nil
-#    sock.puts JSON.generate(board.to_hash)
-#
-#    print(sock, " is gone\n")
-#    sock.close
-#  end
-#}
-
-#dealer_thread.join
-#players_thread.join
-#audiences_thread.join

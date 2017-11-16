@@ -116,6 +116,7 @@ class HeizuBoard
     hash[:turn_team] = next_player.name
     hash[:count] = @count
     hash[:finished] = @finished
+    hash[:players] = [{:team_name => @player1.name}, {:team_name => @player2.name}]
     hash[:units] = @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? }.map{|unit| unit.to_hash}
     return hash
   end
