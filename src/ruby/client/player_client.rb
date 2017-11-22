@@ -1,8 +1,6 @@
 require 'socket'
 require 'json'
 
-Thread.abort_on_exception = true
-
 team_name = 'foo'
 
 # サーバ接続 OPEN
