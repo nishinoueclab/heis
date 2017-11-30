@@ -60,5 +60,6 @@ $ git pull
 
 # Customize Server
 If you want to customize the server, you can read the following files first.
-* src/ruby/server/config.rb
-* src/ruby/server/start.rb
+
+0. src/ruby/server/config.rb
+0. src/ruby/server/start.rb
