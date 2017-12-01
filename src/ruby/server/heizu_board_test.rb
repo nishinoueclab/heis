@@ -49,6 +49,7 @@ class HeizuBoardTest < Test::Unit::TestCase
     assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
     assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
     
+    # 同一の場所に移動する場合
     assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
     assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
     
