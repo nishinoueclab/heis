@@ -10,6 +10,7 @@ require 'json'
 require 'heizu_board'
 require 'player'
 require 'config'
+require 'player_client_stab'
 require 'logger'
 require 'json-schema'
 
@@ -62,10 +63,21 @@ Thread.new {
 }
 # プレイヤー初期化
 threads = []
-2.times do
-  player_socks << server_for_players.accept
-  threads << Thread.start(player_socks.last) { |sock| players << create_player(sock)}
-end
+invite = Thread.new {
+  2.times do
+    player_socks << server_for_players.accept
+    threads << Thread.start(player_socks.last) { |sock| players << create_player(sock)}
+  end
+}
+
+# クライアントスタブの起動
+TEST_PLAYER.each {|name|
+  puts name
+  PlayerClientStab.new(name, 'localhost', PLAYERS_SERVER_PORT).run
+}
+
+invite.join
+
 # 2人目以降のプレイヤーは拒否
 Thread.new {
   loop do
