@@ -63,8 +63,8 @@ class HeizuBoard
     unit = get_unit(unit_id)
     last_locate = locate(unit)
     if(unit.move_to?(to))
-      @board[to[:y]][to[:x]] = unit
       @board[last_locate[:y]][last_locate[:x]] = nil
+      @board[to[:y]][to[:x]] = unit
       return true
     else
       return false

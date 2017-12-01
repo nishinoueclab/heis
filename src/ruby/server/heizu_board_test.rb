@@ -48,6 +48,10 @@ class HeizuBoardTest < Test::Unit::TestCase
     ## 移動できる場合の移動
     assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
     assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
+    
+    assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
+    assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
+    
   end
 
   def test_atk
