@@ -39,20 +39,32 @@ class HeizuBoardTest < Test::Unit::TestCase
     assert_equal(true, @board.get_unit('fo00').move_to?({:x => 14, :y => 0}))
     assert_equal(true, @board.get_unit('fo00').move_to?({:x => 12, :y => 0}))
     assert_equal(true, @board.get_unit('fo00').move_to?({:x => 13, :y => 1}))
+    assert_equal(true, @board.get_unit('fo00').move_to?({:x => 12, :y => 1}))
+    assert_equal(true, @board.get_unit('fo00').move_to?({:x => 11, :y => 0}))
+    ## 味方を飛び越える
+    assert_equal(true, @board.get_unit('fo01').move_to?({:x => 13, :y => 0}))
+
     # 移動できない場合
     assert_equal(false, @board.get_unit('fo00').move_to?({:x => 15, :y => 0}))
     assert_equal(false, @board.get_unit('fo00').move_to?({:x => 16, :y => 0}))
     assert_equal(false, @board.get_unit('fo00').move_to?({:x => 15, :y => 1}))
     assert_equal(false, @board.get_unit('fo00').move_to?({:x => 0, :y => 0}))
+    ## 敵を飛び越えない
+    ### fo30とgo05を隣り合わせる。
+    for i in 1..8 do
+      assert_equal(true, @board.move_unit('fo30', {:x => 14 - i, :y => 5 + i}))
+    end
+    assert_equal(true, @board.move_unit('go05', {:x => 5, :y => 13}))
+    assert_equal(false, @board.get_unit('fo30').move_to?({:x => 3, :y => 13}))
 
     ## 移動できる場合の移動
     assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
     assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
-    
+
     # 同一の場所に移動する場合
     assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
     assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
-    
+
   end
 
   def test_atk
