@@ -89,6 +89,11 @@ class HeizuBoardTest < Test::Unit::TestCase
     # 攻撃する
     assert_equal(true, @board.atk('fo30', {:x => 5, :y => 13}))
     assert_equal(1, @board.get_unit('go05').hp)
+
+    # 攻撃できないところを指定する
+    assert_equal(false, @board.atk('fo00', {:x => 5, :y => 13}))
+    assert_equal(false, @board.atk('fo00', {:x => 0, :y => 0}))
+
   end
 
   def test_turn

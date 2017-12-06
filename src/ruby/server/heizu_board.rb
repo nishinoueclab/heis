@@ -78,6 +78,7 @@ class HeizuBoard
     unit = get_unit(unit_id)
     tunit = get_unit_by_locate(target)
     return false if(unit.nil?)
+    return false if(tunit.nil?)
     if(unit.atkable?(tunit))
       unit.atk(tunit)
       return true
