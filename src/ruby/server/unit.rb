@@ -13,7 +13,7 @@ class Unit
     @type = type
   end
 
-  attr_reader :player, :hp, :id, :type
+  attr_reader :player, :hp, :type
 
   protected def damage(atk = 1)
     @hp -= atk
