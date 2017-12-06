@@ -42,6 +42,17 @@ $ ruby start.rb
 $ ruby src/ruby/client/player_client_test.rb
 ```
 
+# Stating Simple Player CUI
+You should run server before stating Player CUI.
+You can start Player CUI with the following.
+```
+$ ruby src/ruby/client/player_client_cui.rb
+{"message":"Send your team_name."}
+your team name > yaa
+Welcome yaa!
+```
+ 
+
 # Starting Sample Heizu Player Client
 ```
 $ ruby src/ruby/server/player_client.rb
