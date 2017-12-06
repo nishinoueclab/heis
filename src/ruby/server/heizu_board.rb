@@ -1,5 +1,6 @@
 require 'unit'
 require 'json'
+require 'player'
 
 class HeizuBoard
   def initialize(player1, player2, max_turn = nil)
@@ -20,6 +21,24 @@ class HeizuBoard
       end
     end
 
+  end
+
+  # hashを入れると
+  def set_values(board_hash)
+
+    @width, @height = board_hash[:width], board_hash[:height]
+    @player1 = Player.new(board_hash[:players][0][:team_name])
+    @player2 = Player.new(board_hash[:players][1][:team_name])
+    @next_player = board_hash[:turn_team] == @player1.name ? @player1 : @player2
+    @count = board_hash[:count]
+    @max_turn = nil
+    @finished = board_hash[:finished]
+    @board = Array.new(@height){Array.new(@width){nil}}
+    board_hash[:units].each {|unit|
+      @board[unit[:locate][:y]][unit[:locate][:x]] = Unit.new(self, unit[:unit_id][2..4].to_i, unit[:team] == @player1.name ? @player1 : @player2, unit[:hp])
+        
+    }
+    return self
   end
 
   attr_reader :count, :finished, :width, :height
@@ -94,7 +113,7 @@ class HeizuBoard
   def get_unit_by_locate(locate)
     @board[locate[:y]][locate[:x]]
   end
-  
+
   # ユニットを強制的に削除する
   def remove_unit(unit)
     l = locate(unit)
