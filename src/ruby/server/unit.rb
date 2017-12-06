@@ -17,6 +17,7 @@ class Unit
 
   protected def damage(atk = 1)
     @hp -= atk
+    @board.remove_unit(self) if !self.alive?
   end
 
   def unit_id

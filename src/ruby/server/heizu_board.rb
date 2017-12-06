@@ -93,6 +93,12 @@ class HeizuBoard
   def get_unit_by_locate(locate)
     @board[locate[:y]][locate[:x]]
   end
+  
+  # ユニットを強制的に削除する
+  def remove_unit(unit)
+    l = locate(unit)
+    @board[l[:y]][l[:x]] = nil
+  end
 
   # ユニットの場所を返却する
   def locate(unit)

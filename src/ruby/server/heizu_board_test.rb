@@ -57,6 +57,12 @@ class HeizuBoardTest < Test::Unit::TestCase
     assert_equal(true, @board.move_unit('go05', {:x => 5, :y => 13}))
     assert_equal(false, @board.get_unit('fo30').move_to?({:x => 3, :y => 13}))
 
+    # 移動できる場合
+    ### 敵が死んだあとのマスへの移動
+    assert_equal(true, @board.atk('fo30', {:x => 5, :y => 13}))
+    assert_equal(true, @board.atk('fo30', {:x => 5, :y => 13}))
+    assert_equal(true, @board.get_unit('fo30').move_to?({:x => 5, :y => 13}))
+
     ## 移動できる場合の移動
     assert_equal(true, @board.move_unit('fo00', {:x => 13, :y => 1}))
     assert_equal({:x => 13, :y => 1} , @board.locate(@board.get_unit('fo00')))
