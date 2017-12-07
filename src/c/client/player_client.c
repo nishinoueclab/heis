@@ -70,7 +70,7 @@ char *read_line(char *line, int max_chars) {
 
 // バッファから1行取り出す。(get string)
 // 改行に当たるまで待機します。
-char* gets(int sd, char* line) {
+char* sgets(int sd, char* line) {
 	// 前回改行までに取り出した部分
 	static char* read_buf = NULL;
 	if (read_buf == NULL) {
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
 	connect(sd, (struct sockaddr *) &addr, sizeof(struct sockaddr_in));
 
 	// 名前要求
-	gets(sd, recv_json);
+	sgets(sd, recv_json);
 	printf("request name: <<<%s>>>\n", recv_json);
 
 	// 名前送信
@@ -146,12 +146,12 @@ int main(int argc, char *argv[]) {
 	free(name_json);
 
 	// 名前確定
-	gets(sd, recv_json);
+	sgets(sd, recv_json);
 	printf("defined name: <<<%s>>>", recv_json);
 
 	// 盤面情報
 	while (1) {
-		gets(sd, recv_json);
+		sgets(sd, recv_json);
 		printf("<<<%s>>>\n", recv_json);
 		json_t *root = load_json(recv_json);
 		int width = json_integer_value(json_object_get(root, "width"));
@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
 			// 自分の手番でない場合
 			sputs(sd, "{\"a\", \"b\"}\n");
 			// 結果の取得
-			gets(sd, recv_json);
+			sgets(sd, recv_json);
 			printf("%s\n", recv_json);
 		}
 
