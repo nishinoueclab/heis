@@ -123,6 +123,26 @@ class HeizuBoardTest < Test::Unit::TestCase
       ]
     }))
 
+    assert_equal({:result => [{:unit_id => "fo00", :error => "Duplicate unit_id : fo00"}]}, @board.turn({
+      :turn_team => "foo",
+      :contents => [
+      {
+      :unit_id => "fo00",
+      :to => {
+      :x=> 13,
+      :y=> 0
+      }
+      },
+      {
+      :unit_id => "fo00",
+      :to => {
+      :x=> 13,
+      :y=> 0
+      }
+      }
+      ]
+    }))
+
   end
 
   def test_to_s

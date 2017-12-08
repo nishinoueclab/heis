@@ -62,7 +62,7 @@ class HeizuBoard
       if atk = c[:atk]
         next {:unit_id => unit_id, :error => "Can't attack other unit: #{get_unit_by_locate(atk)}"} if(!atk(unit_id, atk))
       end
-
+      unit_ids << unit_id
       next nil
     }.select{|r| !r.nil?}
 
