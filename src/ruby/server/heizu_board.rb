@@ -74,6 +74,10 @@ class HeizuBoard
 
     return {:result => results}
   end
+  
+  def units
+    @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? }
+  end
 
   # あるユニットを動かす
   # @arg unit_id  unit_id as string
