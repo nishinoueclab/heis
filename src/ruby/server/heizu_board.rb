@@ -25,7 +25,6 @@ class HeizuBoard
 
   # hashを入れると
   def set_values(board_hash)
-
     @width, @height = board_hash[:width], board_hash[:height]
     @player1 = Player.new(board_hash[:players][0][:team_name])
     @player2 = Player.new(board_hash[:players][1][:team_name])
@@ -70,7 +69,7 @@ class HeizuBoard
     @next_player = @next_player == @player1 ? @player2 : @player1
 
     @finished = (@count > @max_turn) if @max_turn
-    @finished = true if @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? }.group_by{|u| u.player.name}.map{|k, v| v.size}.min == 0
+    @finished = true if @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? }.group_by{|u| u.player.name}.size == 1
 
     return {:result => results}
   end
@@ -116,6 +115,7 @@ class HeizuBoard
   end
 
   def get_unit_by_locate(locate)
+    return nil if  !(0 <=locate[:x] && locate[:x] < @width && 0 <= locate[:y] && locate[:y] < @height)
     @board[locate[:y]][locate[:x]]
   end
 
