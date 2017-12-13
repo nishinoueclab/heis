@@ -40,7 +40,7 @@ class HeizuBoard
     return self
   end
 
-  attr_reader :count, :finished, :width, :height
+  attr_reader :count, :finished, :width, :height, :player1, :player2
 
   # action jsonを受け取って実行を行います。
   #
@@ -74,8 +74,9 @@ class HeizuBoard
     return {:result => results}
   end
   
-  def units
-    @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? }
+  def units(player = nil)
+    return @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? } if player.nil?
+    @board.flatten(1).select{|u| !u.nil? }.select{|u| u.alive? && u.player == player}
   end
 
   # あるユニットを動かす

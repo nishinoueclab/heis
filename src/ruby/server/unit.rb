@@ -38,6 +38,7 @@ class Unit
   end
 
   def atkable?(other)
+    return false if other.nil?
     return other.player != self.player && self.distance(other) == 1
   end
 

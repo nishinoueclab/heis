@@ -116,7 +116,8 @@ loop do
         loop do
           atk_to = getxy(message = "attack to ")
           break if atk_to.nil?
-          break if unit.atkable?(atk_to)
+          next if board.get_unit_by_locate(atk_to).nil?
+          break if unit.atkable?(get_unit_by_locate(atk_to))
         end
         if(atk_to.nil?)
           puts "Only attack action is canceled."

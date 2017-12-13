@@ -90,11 +90,11 @@ class HeizuServer
         mutex.synchronize{
           # xxx_socksの保護
           notify(player_socks, JSON.generate(board.to_hash))
-          notify(audience_socks, "#{board.count()} turn")
+          notify(audience_socks, "#{board.count()} turn #{board.player1.name}(#{board.units(board.player1).size}) vs #{board.player2.name}(#{board.units(board.player2).size})")
           notify(audience_socks, board.to_s)
         }
 
-        glog.info{"#{board.count} turn\n#{board.to_s}"}
+        glog.info{"#{board.count} turn #{board.player1.name}(#{board.units(board.player1).size}) vs #{board.player2.name}(#{board.units(board.player2).size})\n#{board.to_s}"}
         break if board.finished
 
         action_str = board.next_player().sock.gets.chomp
@@ -145,7 +145,7 @@ class HeizuServer
     @slog.info{"send #{sock} : #{require_name}"}
     name = JSON.parse(sock.gets)["team_name"]
     puts "#{name} is accepted."
-    @slog.info{"#name confirm {sock} = #{name}"}
+    @slog.info{"name confirm #{sock} = #{name}"}
     message_json = JSON.generate({"your_team_name" => name})
     sock.puts message_json
     @slog.info{"send #{name} : #{message_json}"}
