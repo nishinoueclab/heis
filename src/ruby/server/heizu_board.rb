@@ -54,7 +54,8 @@ class HeizuBoard
 
       unit_id = c[:unit_id]
       next {:unit_id => unit_id, :error => "Duplicate unit_id : #{unit_id}"} if(unit_ids.include?(unit_id))
-
+      unit_ids << unit_id
+        
       if to = c[:to]
         next {:unit_id => unit_id, :error => "Can't move this unit : #{unit_id}"} if(!move_unit(unit_id, to))
       end
@@ -62,7 +63,7 @@ class HeizuBoard
       if atk = c[:atk]
         next {:unit_id => unit_id, :error => "Can't attack other unit: #{get_unit_by_locate(atk)}"} if(!atk(unit_id, atk))
       end
-      unit_ids << unit_id
+      
       next nil
     }.select{|r| !r.nil?}
 
