@@ -59,9 +59,15 @@ $ ruby src/ruby/server/player_client.rb
 ```
 
 # Starting Sample Heizu Audience Client
+You can connect server as an audience on localhost port 20000 that is default.
 ```
 $ ruby src/ruby/server/audience_client.rb
 ```
+You can connect with any IP address and port.
+```
+$ ruby src/ruby/server/audience_client.rb 192.168.xx.xx 20000
+```
+
 
 # Update Repository
 ```
