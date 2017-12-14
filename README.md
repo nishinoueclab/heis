@@ -12,7 +12,7 @@ $ ruby -v
 
 # Getting Repository
 ```
-$ git clone https://tolz@bitbucket.org/tolz/heizu_server.git
+$ git clone https://github.com/nishinoueclab/heizu.git
 ```
 
 # Ready for Starting Heizu Server
