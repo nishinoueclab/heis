@@ -1,18 +1,18 @@
 =begin
-Heizuの単体テストコード
+Heisの単体テストコード
 =end
 PRJHOME = File.dirname('.')
 $: << PRJHOME + '/src/ruby/server'
 
 require 'test/unit'
-require 'heizu_board'
+require 'heis_board'
 require 'player'
 
-class HeizuBoardTest < Test::Unit::TestCase
+class HeisBoardTest < Test::Unit::TestCase
   def setup
     @player1 = Player.new("foo")
     @player2 = Player.new("goo")
-    @board = HeizuBoard.new(@player1, @player2)
+    @board = HeisBoard.new(@player1, @player2)
   end
 
   def test_get_unit

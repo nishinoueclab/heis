@@ -1,7 +1,7 @@
 require 'socket'
 require 'json'
 
-team_name = 'foo'
+team_name = 'goo'
 
 # サーバ接続 OPEN
 sock = TCPSocket.open("localhost", 20000)
@@ -27,7 +27,7 @@ loop do
   if(board["turn_team"] == team_name)
     puts "my turn"
     # 実際には行動JSONを送る
-    sock.puts '{"a": "b"}'
+    sock.puts '{"turn_team": "#{turn_name}", "contents":[{"unit_id":"fo00", "to":{"x":"0","y":"0"}}]}'
     sock.flush
 
     # 結果を取得

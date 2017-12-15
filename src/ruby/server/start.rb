@@ -7,7 +7,7 @@ $: << PRJHOME + '/src/ruby/server'
 
 require 'socket'
 require 'json'
-require 'heizu_board'
+require 'heis_board'
 require 'player'
 require 'config'
 require 'player_client_stab'
@@ -20,7 +20,8 @@ Thread.abort_on_exception = true
 slog = Logger.new(SERVER_LOG + "/server.log")
 glog = Logger.new(GAME_LOG + "/game.log")
 
-class HeizuServer
+
+class HeisServer
   def initialize(slog, glog)
     @slog, @glog = slog, glog
     mutex = Mutex.new
@@ -79,7 +80,7 @@ class HeizuServer
       threads.each {|t| t.join()}
 
       # 盤面の作成
-      puts board = HeizuBoard.new(players[0], players[1], MAX_TURN)
+      puts board = HeisBoard.new(players[0], players[1], MAX_TURN)
 
       action_schema = File.open(File.dirname(__FILE__) + "/action-schema.json").read
 
@@ -161,7 +162,7 @@ class HeizuServer
 end
 
 begin
-  HeizuServer.new(slog, glog)
+  HeisServer.new(slog, glog)
 rescue => e
   slog.fatal{e}
   STDERR.puts(e)

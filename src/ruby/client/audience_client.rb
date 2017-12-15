@@ -1,5 +1,7 @@
 require 'socket'
 
+Thread.abort_on_exception = true
+
 address = ARGV[0].nil? ? 'localhost' : ARGS[0]
 port = ARGV[1].nil? ? 20001 : ARGS[1].to_s
 

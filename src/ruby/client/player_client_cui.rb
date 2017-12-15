@@ -7,7 +7,7 @@ $: << PRJHOME + '/src/ruby/server'
 
 require 'socket'
 require 'json'
-require 'heizu_board'
+require 'heis_board'
 require 'player'
 require 'config'
 require 'player_client_stab'
@@ -67,7 +67,7 @@ puts "Welcome #{team_name}!"
 
 loop do
   board_hash = JSON.parse(sock.gets, {:symbolize_names => true})
-  board = HeizuBoard.new(nil,nil,nil).set_values(board_hash);
+  board = HeisBoard.new(nil,nil,nil).set_values(board_hash);
   puts "Turn Count = #{board.count}\n", board.to_s, ""
   break if(board.finished)
 

@@ -2,7 +2,7 @@ require 'unit'
 require 'json'
 require 'player'
 
-class HeizuBoard
+class HeisBoard
   def initialize(player1, player2, max_turn = nil)
     @width, @height = 20, 20
     @next_player = player1

@@ -5,7 +5,7 @@ require 'json'
 =end
 
 class Unit
-  def initialize(board, id, player, hp = 2, type ="heizu")
+  def initialize(board, id, player, hp = 2, type ="heis")
     @board = board
     @id = id
     @hp = hp
