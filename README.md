@@ -23,7 +23,7 @@ $ sudo gem install --remote json-schema
 
 Prease make the directory "log" for saving some log files. 
 ```
-$ cd heis_server
+$ cd heis
 $ mkdir log
 ```
 
@@ -71,7 +71,7 @@ $ ruby src/ruby/server/audience_client.rb 192.168.xx.xx 20000
 
 # Update Repository
 ```
-$ cd heis_server
+$ cd heis
 $ git pull
 ```
 
