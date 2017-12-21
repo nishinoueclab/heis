@@ -52,7 +52,8 @@ class HeisBoard
     results = contents.map { |c|
 
       unit_id = c[:unit_id]
-      next {:unit_id => unit_id, :error => "Duplicate unit_id : #{unit_id}"} if(unit_ids.include?(unit_id))
+      next {:unit_id => unit_id, :error => "Dose not exist unit_id : #{unit_id}"} if self.units.select{|u| u.unit_id == unit_id}.size == 0
+      next {:unit_id => unit_id, :error => "Duplicate unit_id : #{unit_id}"} if unit_ids.include?(unit_id)
       unit_ids << unit_id
         
       if to = c[:to]

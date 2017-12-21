@@ -166,7 +166,22 @@ class HeisBoardTest < Test::Unit::TestCase
       ]
     }))
 
+    assert_equal({:result => [{:error=>"Dose not exist unit_id : fo99", :unit_id=>"fo99"}]}, @board.turn({
+          :turn_team => "foo",
+          :contents => [
+          {
+          :unit_id => "fo99",
+          :to => {
+          :x=> 13,
+          :y=> 0
+          },
+          :atk => {:x=> 13,
+          :y=> 0}
+          }
+          ]
+        }))
   end
+  
 
   def test_to_s
     @board.to_s
