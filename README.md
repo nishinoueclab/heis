@@ -7,6 +7,7 @@ Heis server in this repository.
 You can get more information from the following links.
 * [基本的通信プロトコル](https://github.com/nishinoueclab/heis/blob/master/doc/%E5%9F%BA%E6%9C%AC%E7%9A%84%E9%80%9A%E4%BF%A1%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB.md)
 * [アプリケーション通信プロトコル](https://github.com/nishinoueclab/heis/blob/master/doc/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%80%9A%E4%BF%A1%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB.md)
+* [CUI操作説明プロトコル](https://github.com/nishinoueclab/heis/blob/master/doc/CUI.md)
 
 # Before You Start
 Please make sure Ruby is installed.
